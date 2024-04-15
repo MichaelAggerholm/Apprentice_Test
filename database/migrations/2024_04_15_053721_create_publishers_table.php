@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('publishers', function (Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->String('name');
+            $table->String('address');
+            $table->String('city');
+            $table->String('zip');
+            $table->String('country');
+            $table->String('contact_name');
+            $table->String('contact_email');
+            $table->String('contact_phone')->nullable();
+            $table->String('website_url')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('publishers');
+    }
+};
