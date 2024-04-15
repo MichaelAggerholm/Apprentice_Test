@@ -1,8 +1,10 @@
 <nav class="menu">
 
-    <a href="/" class="logo">
-        Bookstore
-    </a>
+    <h1>
+        <a href="/" class="logo">
+            Sidernes Verden
+        </a>
+    </h1>
 
     <ul>
         <li><a href="#">Menu 1</a></li>
