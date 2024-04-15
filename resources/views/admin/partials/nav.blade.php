@@ -16,7 +16,7 @@
             <a href="#">Udgiverer</a>
         </li>
         <li>
-            <a href="#">Formater</a>
+            <a href="{{route('adminpanel.formats')}}">Formater</a>
         </li>
         <li>
             <a href="#">Tilstande</a>

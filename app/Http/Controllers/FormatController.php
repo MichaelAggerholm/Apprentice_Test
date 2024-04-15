@@ -7,59 +7,36 @@ use Illuminate\Http\Request;
 
 class FormatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index(){
+        $formats = Format::all();
+        $deleted_formats = Format::onlyTrashed()->get();
+        return view('admin.pages.formats.index', ['formats' => $formats, 'deleted_formats' => $deleted_formats]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:formats|max:255'
+        ]);
+
+        $format = new Format();
+        $format->name = $request->name;
+        $format->save();
+
+
+        return redirect()->back()->with('success', 'Format blev oprettet');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function destroy($id) {
+        $format = Format::findOrFail($id);
+        $format->delete();
+
+        return back()->with('success', 'Format blev slettet');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Format $format)
-    {
-        //
-    }
+    public function restore($id) {
+        $format = Format::onlyTrashed()->findOrFail($id);
+        $format->restore();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Format $format)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Format $format)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Format $format)
-    {
-        //
+        return redirect()->back()->with('success', 'Formatet blev gendannet');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormatController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // Adminpanel routes
 Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('adminpanel');
+
+    // Format
+    Route::group(['prefix' => 'formats'], function() {
+        Route::get('/', [FormatController::class, 'index'])->name('adminpanel.formats');
+        Route::post('/', [FormatController::class, 'store'])->name('adminpanel.format.store');
+        Route::delete('/{id}', [FormatController::class, 'destroy'])->name('adminpanel.format.destroy');
+        Route::patch('/{id}', [FormatController::class, 'restore'])->name('adminpanel.format.restore');
+    });
 });
 
 // Route for clearing caches
