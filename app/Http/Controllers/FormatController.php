@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FormatActivity;
 use App\Models\Format;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ class FormatController extends Controller
         $format->name = $request->name;
         $format->save();
 
+        event(new FormatActivity(auth()->user(), $format, 'created'));
 
         return redirect()->back()->with('success', 'Format blev oprettet');
     }
@@ -30,12 +32,16 @@ class FormatController extends Controller
         $format = Format::findOrFail($id);
         $format->delete();
 
+        event(new FormatActivity(auth()->user(), $format, 'deleted'));
+
         return back()->with('success', 'Format blev slettet');
     }
 
     public function restore($id) {
         $format = Format::onlyTrashed()->findOrFail($id);
         $format->restore();
+
+        event(new FormatActivity(auth()->user(), $format, 'restored'));
 
         return redirect()->back()->with('success', 'Formatet blev gendannet');
     }

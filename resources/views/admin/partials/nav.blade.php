@@ -34,7 +34,7 @@
             <a href="#">Brugerer</a>
         </li>
         <li>
-            <a href="#">Admin aktivitet</a>
+            <a href="{{route('adminpanel.activitylog')}}">Admin aktivitet</a>
         </li>
     </ul>
 

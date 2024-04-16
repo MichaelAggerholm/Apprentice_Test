@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConditionController;
@@ -39,6 +40,11 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [ConditionController::class, 'store'])->name('adminpanel.condition.store');
         Route::delete('/{id}', [ConditionController::class, 'destroy'])->name('adminpanel.condition.destroy');
         Route::patch('/{id}', [ConditionController::class, 'restore'])->name('adminpanel.condition.restore');
+    });
+
+    // Activity Log
+    Route::group(['prefix' => 'activitylog'], function() {
+        Route::get('/', [ActivityLogController::class, 'index'])->name('adminpanel.activitylog');
     });
 });
 
