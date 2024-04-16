@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\FormatController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Artisan;
@@ -30,6 +31,14 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [FormatController::class, 'store'])->name('adminpanel.format.store');
         Route::delete('/{id}', [FormatController::class, 'destroy'])->name('adminpanel.format.destroy');
         Route::patch('/{id}', [FormatController::class, 'restore'])->name('adminpanel.format.restore');
+    });
+
+    // Condition
+    Route::group(['prefix' => 'conditions'], function() {
+        Route::get('/', [ConditionController::class, 'index'])->name('adminpanel.conditions');
+        Route::post('/', [ConditionController::class, 'store'])->name('adminpanel.condition.store');
+        Route::delete('/{id}', [ConditionController::class, 'destroy'])->name('adminpanel.condition.destroy');
+        Route::patch('/{id}', [ConditionController::class, 'restore'])->name('adminpanel.condition.restore');
     });
 });
 

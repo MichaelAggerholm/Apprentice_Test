@@ -7,59 +7,35 @@ use Illuminate\Http\Request;
 
 class ConditionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index(){
+        $conditions = Condition::all();
+        $deleted_conditions = Condition::onlyTrashed()->get();
+        return view('admin.pages.conditions.index', ['conditions' => $conditions, 'deleted_conditions' => $deleted_conditions]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:conditions|max:255'
+        ]);
+
+        $condition = new Condition();
+        $condition->name = $request->name;
+        $condition->save();
+
+        return redirect()->back()->with('success', 'Tilstand blev oprettet');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function destroy($id) {
+        $condition = Condition::findOrFail($id);
+        $condition->delete();
+
+        return back()->with('success', 'Tilstand blev slettet');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Condition $condition)
-    {
-        //
-    }
+    public function restore($id) {
+        $condition = Condition::onlyTrashed()->findOrFail($id);
+        $condition->restore();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Condition $condition)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Condition $condition)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Condition $condition)
-    {
-        //
+        return redirect()->back()->with('success', 'Tilstanden blev gendannet');
     }
 }

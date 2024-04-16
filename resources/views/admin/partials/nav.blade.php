@@ -19,7 +19,7 @@
             <a href="{{route('adminpanel.formats')}}">Formater</a>
         </li>
         <li>
-            <a href="#">Tilstande</a>
+            <a href="{{route('adminpanel.conditions')}}">Tilstande</a>
         </li>
         <li>
             <a href="#">Genrer</a>
