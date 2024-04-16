@@ -9,6 +9,7 @@ use App\Http\Controllers\FormatController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PublisherController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,14 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [AuthorController::class, 'store'])->name('adminpanel.author.store');
         Route::delete('/{id}', [AuthorController::class, 'destroy'])->name('adminpanel.author.destroy');
         Route::patch('/{id}', [AuthorController::class, 'restore'])->name('adminpanel.author.restore');
+    });
+
+    // Publisher
+    Route::group(['prefix' => 'publishers'], function() {
+        Route::get('/', [PublisherController::class, 'index'])->name('adminpanel.publishers');
+        Route::post('/', [PublisherController::class, 'store'])->name('adminpanel.publisher.store');
+        Route::delete('/{id}', [PublisherController::class, 'destroy'])->name('adminpanel.publisher.destroy');
+        Route::patch('/{id}', [PublisherController::class, 'restore'])->name('adminpanel.publisher.restore');
     });
 
     // Activity Log

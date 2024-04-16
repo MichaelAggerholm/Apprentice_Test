@@ -13,7 +13,7 @@
             <a href="#">Bøger</a>
         </li>
         <li>
-            <a href="#">Udgiverer</a>
+            <a href="{{route('adminpanel.publishers')}}">Udgiverer</a>
         </li>
         <li>
             <a href="{{route('adminpanel.formats')}}">Formater</a>

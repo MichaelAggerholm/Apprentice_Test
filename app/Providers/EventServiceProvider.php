@@ -3,13 +3,17 @@
 namespace App\Providers;
 
 use App\Events\AuthorActivity;
+use App\Events\ConditionActivity;
 use App\Events\FormatActivity;
 use App\Events\GenreActivity;
 use App\Events\LanguageActivity;
+use App\Events\PublisherActivity;
 use App\Listeners\LogAuthorActivity;
+use App\Listeners\LogConditionActivity;
 use App\Listeners\LogFormatActivity;
 use App\Listeners\LogGenreActivity;
 use App\Listeners\LogLanguageActivity;
+use App\Listeners\LogPublisherActivity;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -40,6 +44,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         AuthorActivity::class => [
             LogAuthorActivity::class,
+        ],
+        PublisherActivity::class => [
+            LogPublisherActivity::class,
+        ],
+        ConditionActivity::class => [
+            LogConditionActivity::class,
         ],
     ];
 
