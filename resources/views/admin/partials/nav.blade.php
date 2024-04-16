@@ -22,10 +22,10 @@
             <a href="{{route('adminpanel.conditions')}}">Tilstande</a>
         </li>
         <li>
-            <a href="#">Genrer</a>
+            <a href="{{route('adminpanel.genres')}}">Genrer</a>
         </li>
         <li>
-            <a href="#">Sprog</a>
+            <a href="{{route('adminpanel.languages')}}">Sprog</a>
         </li>
         <li>
             <a href="#">Forfatterer</a>

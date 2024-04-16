@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Events\FormatActivity;
+use App\Events\GenreActivity;
+use App\Events\LanguageActivity;
 use App\Listeners\LogFormatActivity;
+use App\Listeners\LogGenreActivity;
+use App\Listeners\LogLanguageActivity;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,6 +29,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         FormatActivity::class => [
             LogFormatActivity::class,
+        ],
+        GenreActivity::class => [
+            LogGenreActivity::class,
+        ],
+        LanguageActivity::class => [
+            LogLanguageActivity::class,
         ],
     ];
 

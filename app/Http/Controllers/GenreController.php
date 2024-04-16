@@ -2,64 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GenreActivity;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index(){
+        $genres = Genre::all();
+        $deleted_genres = Genre::onlyTrashed()->get();
+        return view('admin.pages.genres.index', ['genres' => $genres, 'deleted_genres' => $deleted_genres]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:genres|max:255'
+        ]);
+
+        $genre = new Genre();
+        $genre->name = $request->name;
+        $genre->save();
+
+        event(new GenreActivity(auth()->user(), $genre, 'created'));
+
+        return redirect()->back()->with('success', 'Genren blev oprettet');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function destroy($id) {
+        $genre = Genre::findOrFail($id);
+        $genre->delete();
+
+        event(new GenreActivity(auth()->user(), $genre, 'deleted'));
+
+        return back()->with('success', 'Genren blev slettet');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Genre $genre)
-    {
-        //
-    }
+    public function restore($id) {
+        $genre = Genre::onlyTrashed()->findOrFail($id);
+        $genre->restore();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Genre $genre)
-    {
-        //
-    }
+        event(new GenreActivity(auth()->user(), $genre, 'restored'));
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Genre $genre)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Genre $genre)
-    {
-        //
+        return redirect()->back()->with('success', 'Genren blev gendannet');
     }
 }

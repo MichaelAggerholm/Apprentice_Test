@@ -2,64 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ConditionActivity;
+use App\Events\LanguageActivity;
 use App\Models\Language;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index(){
+        $languages = Language::all();
+        $deleted_languages = Language::onlyTrashed()->get();
+        return view('admin.pages.languages.index', ['languages' => $languages, 'deleted_languages' => $deleted_languages]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:languages|max:255'
+        ]);
+
+        $genre = new Language();
+        $genre->name = $request->name;
+        $genre->save();
+
+        event(new LanguageActivity(auth()->user(), $genre, 'created'));
+
+        return redirect()->back()->with('success', 'Sproget blev oprettet');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function destroy($id) {
+        $language = Language::findOrFail($id);
+        $language->delete();
+
+        event(new LanguageActivity(auth()->user(), $language, 'deleted'));
+
+        return back()->with('success', 'Sproget blev slettet');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Language $language)
-    {
-        //
-    }
+    public function restore($id) {
+        $language = Language::onlyTrashed()->findOrFail($id);
+        $language->restore();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Language $language)
-    {
-        //
-    }
+        event(new LanguageActivity(auth()->user(), $language, 'restored'));
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Language $language)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Language $language)
-    {
-        //
+        return redirect()->back()->with('success', 'Sproget blev gendannet');
     }
 }

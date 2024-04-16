@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\FormatController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,22 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [ConditionController::class, 'store'])->name('adminpanel.condition.store');
         Route::delete('/{id}', [ConditionController::class, 'destroy'])->name('adminpanel.condition.destroy');
         Route::patch('/{id}', [ConditionController::class, 'restore'])->name('adminpanel.condition.restore');
+    });
+
+    // Genre
+    Route::group(['prefix' => 'genres'], function() {
+        Route::get('/', [GenreController::class, 'index'])->name('adminpanel.genres');
+        Route::post('/', [GenreController::class, 'store'])->name('adminpanel.genre.store');
+        Route::delete('/{id}', [GenreController::class, 'destroy'])->name('adminpanel.genre.destroy');
+        Route::patch('/{id}', [GenreController::class, 'restore'])->name('adminpanel.genre.restore');
+    });
+
+    // Language
+    Route::group(['prefix' => 'languages'], function() {
+        Route::get('/', [LanguageController::class, 'index'])->name('adminpanel.languages');
+        Route::post('/', [LanguageController::class, 'store'])->name('adminpanel.language.store');
+        Route::delete('/{id}', [LanguageController::class, 'destroy'])->name('adminpanel.language.destroy');
+        Route::patch('/{id}', [LanguageController::class, 'restore'])->name('adminpanel.language.restore');
     });
 
     // Activity Log
