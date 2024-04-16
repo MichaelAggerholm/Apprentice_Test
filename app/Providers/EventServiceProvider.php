@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\AuthorActivity;
 use App\Events\FormatActivity;
 use App\Events\GenreActivity;
 use App\Events\LanguageActivity;
+use App\Listeners\LogAuthorActivity;
 use App\Listeners\LogFormatActivity;
 use App\Listeners\LogGenreActivity;
 use App\Listeners\LogLanguageActivity;
@@ -35,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         LanguageActivity::class => [
             LogLanguageActivity::class,
+        ],
+        AuthorActivity::class => [
+            LogAuthorActivity::class,
         ],
     ];
 

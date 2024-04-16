@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\FormatController;
 use App\Http\Controllers\GenreController;
@@ -58,6 +59,14 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [LanguageController::class, 'store'])->name('adminpanel.language.store');
         Route::delete('/{id}', [LanguageController::class, 'destroy'])->name('adminpanel.language.destroy');
         Route::patch('/{id}', [LanguageController::class, 'restore'])->name('adminpanel.language.restore');
+    });
+
+    // Author
+    Route::group(['prefix' => 'authors'], function() {
+        Route::get('/', [AuthorController::class, 'index'])->name('adminpanel.authors');
+        Route::post('/', [AuthorController::class, 'store'])->name('adminpanel.author.store');
+        Route::delete('/{id}', [AuthorController::class, 'destroy'])->name('adminpanel.author.destroy');
+        Route::patch('/{id}', [AuthorController::class, 'restore'])->name('adminpanel.author.restore');
     });
 
     // Activity Log

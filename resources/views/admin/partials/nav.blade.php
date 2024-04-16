@@ -28,7 +28,7 @@
             <a href="{{route('adminpanel.languages')}}">Sprog</a>
         </li>
         <li>
-            <a href="#">Forfatterer</a>
+            <a href="{{route('adminpanel.authors')}}">Forfatterer</a>
         </li>
         <li>
             <a href="#">Brugerer</a>
