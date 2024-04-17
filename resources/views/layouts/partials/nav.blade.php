@@ -9,7 +9,19 @@
     <ul>
         <li><a href="#">Menu 1</a></li>
         <li><a href="#">Menu 2</a></li>
-        <li><a href="#"><span class="info-count">2</span>Kurv</a></li>
+
+        <?php
+        $quantity = 0;
+
+        if (session()->has('cart')) {
+            $cart = session()->get('cart');
+
+            foreach ($cart as $item) {
+                $quantity += $item['quantity'];
+            }
+        }
+        ?>
+        <li><a href="{{route('cart')}}"><span class="info-count">{{$quantity}}</span>Kurv</a></li>
         <li><a href="#">Menu 4</a></li>
 
         <li>

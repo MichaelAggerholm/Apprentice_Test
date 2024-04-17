@@ -16,6 +16,11 @@ class PagesController extends Controller
         ]);
     }
 
+    // Kurv
+    public function cart() {
+        return view('pages.cart');
+    }
+
     public function book($id) {
         return view('pages.book');
     }

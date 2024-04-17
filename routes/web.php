@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\FormatController;
 use App\Http\Controllers\GenreController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
+Route::get('/cart', [PagesController::class, 'cart'])->name('cart');
 Route::get('/book/{id}', [PagesController::class, 'book'])->name('book');
 Route::get('/account', [PagesController::class, 'account'])->name('account')->middleware('auth');
 
@@ -26,6 +28,11 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'postRegister'])->middleware('guest');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Cart
+Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/remove-from-cart/{key}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+
 
 // Adminpanel routes
 Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
