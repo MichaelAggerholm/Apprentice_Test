@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Events\AuthorActivity;
+use App\Events\BookActivity;
 use App\Events\ConditionActivity;
 use App\Events\FormatActivity;
 use App\Events\GenreActivity;
 use App\Events\LanguageActivity;
 use App\Events\PublisherActivity;
 use App\Listeners\LogAuthorActivity;
+use App\Listeners\LogBookActivity;
 use App\Listeners\LogConditionActivity;
 use App\Listeners\LogFormatActivity;
 use App\Listeners\LogGenreActivity;
@@ -50,6 +52,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ConditionActivity::class => [
             LogConditionActivity::class,
+        ],
+        BookActivity::class => [
+            LogBookActivity::class,
         ],
     ];
 

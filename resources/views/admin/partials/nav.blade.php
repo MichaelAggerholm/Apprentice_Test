@@ -10,7 +10,7 @@
             <a href="#">Ordrer</a>
         </li>
         <li>
-            <a href="#">Bøger</a>
+            <a href="{{route('adminpanel.books')}}">Bøger</a>
         </li>
         <li>
             <a href="{{route('adminpanel.publishers')}}">Udgiverer</a>

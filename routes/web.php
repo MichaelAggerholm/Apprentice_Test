@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\FormatController;
 use App\Http\Controllers\GenreController;
@@ -76,6 +77,14 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [PublisherController::class, 'store'])->name('adminpanel.publisher.store');
         Route::delete('/{id}', [PublisherController::class, 'destroy'])->name('adminpanel.publisher.destroy');
         Route::patch('/{id}', [PublisherController::class, 'restore'])->name('adminpanel.publisher.restore');
+    });
+
+    // Book
+    Route::group(['prefix' => 'books'], function() {
+        Route::get('/', [BookController::class, 'index'])->name('adminpanel.books');
+        Route::post('/', [BookController::class, 'store'])->name('adminpanel.book.store');
+        Route::delete('/{id}', [BookController::class, 'destroy'])->name('adminpanel.book.destroy');
+        Route::patch('/{id}', [BookController::class, 'restore'])->name('adminpanel.book.restore');
     });
 
     // Activity Log
