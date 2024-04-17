@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book_author', function (Blueprint $table) {
+        Schema::create('author_book', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->foreignId('book_id')->constrained()->onDelete('cascade');;
             $table->foreignId('author_id')->constrained()->onDelete('cascade');;
