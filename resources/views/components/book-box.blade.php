@@ -1,11 +1,12 @@
 <section class="book-box">
     <div class="image">
-        <img src="{{asset('img/books/pandekage_huset.jpg')}}" alt="">
+        <img src="{{asset('storage/' . $book->image)}}" alt="">
     </div>
 
     <a href="{{route('book', $book->id)}}">
-        <div class="product-title">{{$book->title}}</div>
-        <div class="product-category">{{$book->genre->genre}}</div>
-        <div class="product-price">{{$book->price}} Dkk,-</div>
+        <div class="book-title">{{$book->title}}</div>
+        <!-- TODO: Trim efter 20 tegn og afslut med ".." -->
+        <div class="book-genre">{{$book->summary}}</div>
+        <div class="book-price">{{$book->price}} Dkk,-</div>
     </a>
 </section>

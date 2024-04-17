@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Events\BookActivity;
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Condition;
 use App\Models\Format;
+use App\Models\Genre;
 use App\Models\Language;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
@@ -23,6 +25,8 @@ class BookController extends Controller
         $formats = Format::all();
         $publishers = Publisher::all();
         $languages = Language::all();
+        $genres = Genre::all();
+        $authors = Author::all();
         return view('admin.pages.books.index', [
             'books' => $books,
             'deleted_books' => $deleted_books,
@@ -30,6 +34,8 @@ class BookController extends Controller
             'formats' => $formats,
             'publishers' => $publishers,
             'languages' => $languages,
+            'genres' => $genres,
+            'authors' => $authors,
             ]);
     }
 
@@ -39,41 +45,41 @@ class BookController extends Controller
             'format_id' => 'required|integer|exists:formats,id',
             'publisher_id' => 'required|integer|exists:publishers,id',
             'language_id' => 'required|integer|exists:languages,id',
+            'genres' => 'required|array',
+            'authors' => 'required|array',
             'title' => 'required|string|max:255',
             'summary' => 'required|string',
             'isbn' => 'required|string|max:13|unique:books,isbn',
             'publish_date' => 'required|date',
             'page_count' => 'required|integer|min:1',
             'stock' => 'integer|nullable',
-            'price' => 'required|numeric|min:0',
-            'image' => 'image|nullable|max:2048'
+            'price' => 'required|numeric|min:0', // TODO: Skal muligvis ganges med 100 for at virke med betalingsopsætning. (Stripe)
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
         ]);
 
-        $book = new Book;
-        $book->condition_id = $request->condition_id;
-        $book->format_id = $request->format_id;
-        $book->publisher_id = $request->publisher_id;
-        $book->language_id = $request->language_id;
-        $book->title = $request->title;
-        $book->summary = $request->summary;
-        $book->isbn = $request->isbn;
-        $book->publish_date = $request->publish_date;
-        $book->page_count = $request->page_count;
-        $book->stock = $request->has('stock') ? $request->stock : 0;
-        $book->price = $request->price;
+        // For at sikre et unikt navn til billeder som uploades.
+        $image_name = 'book_images/' . time() . '-' . rand(0, 9999) . '.' . $request->image->extension();
+        $request->image->storeAs('public', $image_name);
 
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = time().'_'.$image->getClientOriginalName();
-            $destinationPath = storage_path('uploads');
-            $image->move($destinationPath, $name);
-            $book->image = '/uploads/'.$name;
-        }
-        else {
-            $book->image = NULL;
-        }
+        // Gem bog
+        $book = Book::create([
+            'condition_id' => $request->condition_id,
+            'format_id' => $request->format_id,
+            'publisher_id' => $request->publisher_id,
+            'language_id' => $request->language_id,
+            'title' => $request->title,
+            'summary' => $request->summary,
+            'isbn' => $request->isbn,
+            'publish_date' => $request->publish_date,
+            'page_count' => $request->page_count,
+            'stock' => $request->stock,
+            'price' => $request->price,
+            'image' => $image_name
+        ]);
 
-        $book->save();
+        // Tilføj genre og forfatter til bog
+        $book->genres()->attach($request->genres);
+        $book->authors()->attach($request->authors);
 
         event(new BookActivity(auth()->user(), $book, 'created'));
 

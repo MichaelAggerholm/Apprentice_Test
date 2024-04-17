@@ -87,6 +87,42 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
+                                <label for="genres">Genrer</label>
+                                <select name="genres[]" id="genres"
+                                        multiple
+                                        class="form-control @error('genres') is-invalid @enderror">
+                                    @foreach($genres as $genre)
+                                        <option
+                                            value="{{$genre->id}}" {{in_array($genre->id, old('genres', [])) ? 'selected' : ''}}>
+                                            {{$genre->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('genres')
+                                <span class="invalid-feedback">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="authors">Forfattere</label>
+                                <select name="authors[]" id="authors"
+                                        multiple
+                                        class="form-control @error('authors') is-invalid @enderror">
+                                    @foreach($authors as $author)
+                                        <option
+                                            value="{{$author->id}}" {{in_array($author->id, old('authors', [])) ? 'selected' : ''}}>
+                                            {{$author->author_name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('authors')
+                                <span class="invalid-feedback">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="title">Titel</label>
                                 <input type="text" name="title" id="title"
                                        class="form-control @error('title') is-invalid @enderror"
