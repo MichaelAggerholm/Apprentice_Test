@@ -6,10 +6,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\FormatController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PublisherController;
 use Illuminate\Support\Facades\Artisan;
@@ -19,6 +21,8 @@ Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/cart', [PagesController::class, 'cart'])->name('cart');
 Route::get('/book/{id}', [PagesController::class, 'book'])->name('book');
 Route::get('/account', [PagesController::class, 'account'])->name('account')->middleware('auth');
+Route::get('/checkout', [PagesController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::get('/success', [PagesController::class, 'success'])->name('success');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
@@ -33,6 +37,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::post('/remove-from-cart/{key}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 
+// Checkout
+Route::post('/stripe-checkout', [CheckoutController::class, 'stripeCheckout'])->name('stripeCheckout')->middleware('auth');
 
 // Adminpanel routes
 Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
@@ -97,6 +103,13 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Activity Log
     Route::group(['prefix' => 'activitylog'], function() {
         Route::get('/', [ActivityLogController::class, 'index'])->name('adminpanel.activitylog');
+    });
+
+    // Order routes
+    Route::group(['prefix' => 'orders'], function() {
+        Route::get('/', [OrderController::class, 'index'])->name('adminpanel.orders');
+        Route::get('/{id}', [OrderController::class, 'view'])->name('adminpanel.orders.view');
+        Route::post('/{id}', [OrderController::class, 'updateStatus'])->name('adminpanel.order.status.update');
     });
 });
 
