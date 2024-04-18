@@ -11,11 +11,13 @@ class Order extends Model
 
     protected $guarded = [];
 
-    public function user() {
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function items() {
+    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Item::class);
     }
 }
