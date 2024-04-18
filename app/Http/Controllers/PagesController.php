@@ -16,11 +16,6 @@ class PagesController extends Controller
         ]);
     }
 
-    // Kurv
-    public function cart() {
-        return view('pages.cart');
-    }
-
     public function book($id) {
         $book = Book::with('genres', 'condition', 'format', 'publisher', 'language', 'authors')->findOrFail($id);
 
@@ -29,7 +24,23 @@ class PagesController extends Controller
         ]);
     }
 
+    // Kurv
+    public function cart() {
+        return view('pages.cart');
+    }
+
     public function account() {
         return view('pages.account');
+    }
+
+    // Checkout
+    public function checkout() {
+        return view('pages.checkout');
+    }
+
+    // success
+    public function success() {
+//        return view('pages.success');
+        return 'success';
     }
 }
