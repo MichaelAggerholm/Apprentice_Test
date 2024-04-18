@@ -9,7 +9,7 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $books = Book::with('genres', 'condition', 'format', 'publisher', 'language')->orderBy('created_at')->get();
+        $books = Book::with('genres', 'condition', 'format', 'language')->orderBy('created_at')->get();
 
         return view('pages.home', [
             'books' => $books
@@ -22,7 +22,11 @@ class PagesController extends Controller
     }
 
     public function book($id) {
-        return view('pages.book');
+        $book = Book::with('genres', 'condition', 'format', 'publisher', 'language', 'authors')->findOrFail($id);
+
+        return view('pages.book', [
+            'book' => $book
+        ]);
     }
 
     public function account() {
