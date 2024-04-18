@@ -308,3 +308,132 @@ body {
     padding: 50px 15px;
 }
 
+.pop-up {
+    background: rgba(0,0,0,0.04);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+
+    .pop-up-box {
+        background: #fff;
+        padding: 100px;
+        text-align: center;
+        border-radius: 10px;
+
+        .pop-up-title {
+            color: $blue;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .pop-up-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    }
+}
+
+.book-page {
+    padding: 50px 15px;
+
+    .book-page-row {
+        display: flex;
+
+        .book-page-image {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book-page-details {
+            width: 50%;
+
+            .b-title {
+                color: $blue;
+                font-weight: 600;
+                font-size: 24px;
+                margin-bottom: 10px;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 200px;
+                    left: 0;
+                    bottom: -2px;
+                    border-bottom: 2px solid $blue;
+                }
+            }
+
+            .b-price {
+                color: $pink;
+                font-weight: 600;
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+
+            .b-genre {
+                font-weight: 200;
+                font-size: 16px;
+                color: $grey;
+                font-style: italic;
+                margin-bottom: 10px;
+            }
+
+            .b-description {
+                font-size: 16px;
+                font-weight: 300;
+                color: #323232;
+                margin-bottom: 20px;
+            }
+
+            .b-form {
+                margin-bottom: 20px;
+
+                label {
+                    display: inline-block;
+                    width: 80px;
+                }
+
+                .b-quantity {
+
+                    input {
+                        min-width: 200px;
+                        height: 35px;
+                        border-radius: 200px;
+                        padding: 5px 20px;
+                        text-align: center;
+                        background: #fff;
+                        border: 1px solid $blue;
+                        color: $blue;
+                        font-size: 15px;
+                        font-weight: 600;
+                        appearance: none;
+                    }
+                }
+            }
+
+            .btn-cart {
+                background-color: $dark-orange;
+                color: #fff;
+                height: 40px;
+                width: 100%;
+                transition: all 0.4s ease;
+
+                &:hover {
+                    background-color: $blue;
+                }
+            }
+        }
+    }
+}
+
