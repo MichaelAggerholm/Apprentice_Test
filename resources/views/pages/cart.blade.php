@@ -21,6 +21,7 @@
                     <thead>
                     <tr>
                         <th>Bog</th>
+                        <th></th>
                         <th>Pris</th>
                         <th>Antal</th>
                         <th>Total</th>
@@ -33,11 +34,10 @@
                                 <tr>
                                     <td>
                                         <a href="{{route('book', $item['book']['id'])}}" class="cart-item-title">
-                                            <!-- TODO: Få image til at fungere.. -->
-{{--                                            <img src="{{asset('storage/' . $item['book']['image'])}}" alt="{{$item['book']['title']}}">--}}
                                             <p>{{$item['book']['title']}}</p>
                                         </a>
                                     </td>
+                                    <td><img src="{{asset('storage/' . $item['book']['image'])}}" alt="{{$item['book']['title']}}" style="width:75px;"></td>
                                     <td>{{$item['book']['price']}} kr.</td>
                                     <td>{{$item['quantity']}}</td> <!-- TODO: Gør det muligt at +/- fra quantity, direkte fra kurven -->
                                     <td>{{App\Models\Cart::unitPrice($item)}} kr.</td>
@@ -51,7 +51,7 @@
                             @endforeach
 
                             <tr class="cart-total">
-                                <td colspan="4" style="text-align: right;">Total:</td>
+                                <td colspan="5" style="text-align: right;">Total:</td>
                                 <td>{{\App\Models\Cart::totalAmount()}} kr.</td>
                             </tr>
 
