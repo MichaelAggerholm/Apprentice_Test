@@ -29,6 +29,26 @@ class LanguageController extends Controller
         return redirect()->back()->with('success', 'Sproget blev oprettet');
     }
 
+    public function edit($id)
+    {
+        $language = Language::findOrFail($id);
+        return view('admin.pages.languages.edit', compact('language'));
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|unique:languages,name,' . $id . '|max:255'
+        ]);
+
+        $language = Language::findOrFail($id);
+        $language->name = $request->name;
+        $language->save();
+
+        event(new LanguageActivity(auth()->user(), $language, 'updated'));
+
+        return redirect()->route('adminpanel.languages')->with('success', 'Sproget blev opdateret.');
+    }
+
     public function destroy($id) {
         $language = Language::findOrFail($id);
         $language->delete();

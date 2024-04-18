@@ -71,7 +71,9 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Language
     Route::group(['prefix' => 'languages'], function() {
         Route::get('/', [LanguageController::class, 'index'])->name('adminpanel.languages');
+        Route::get('/{id}/edit', [LanguageController::class, 'edit'])->name('adminpanel.language.edit');
         Route::post('/', [LanguageController::class, 'store'])->name('adminpanel.language.store');
+        Route::put('/{id}', [LanguageController::class, 'update'])->name('adminpanel.language.update');
         Route::delete('/{id}', [LanguageController::class, 'destroy'])->name('adminpanel.language.destroy');
         Route::patch('/{id}', [LanguageController::class, 'restore'])->name('adminpanel.language.restore');
     });
