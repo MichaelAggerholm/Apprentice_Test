@@ -65,8 +65,7 @@
             </div>
 
             <div class="cart-actions">
-                <a href="#" class="btn btn-primary">Til betaling</a>
-{{--                <a href="{{route('checkout')}}" class="btn btn-primary">Til betaling</a>--}}
+                <a href="{{route('checkout')}}" class="btn btn-primary">Til betaling</a>
             </div>
 
         </div>

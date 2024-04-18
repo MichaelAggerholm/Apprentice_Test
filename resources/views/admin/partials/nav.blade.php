@@ -7,7 +7,7 @@
             <a href="{{route('adminpanel')}}">Dashboard</a>
         </li>
         <li>
-            <a href="#">Ordrer</a>
+            <a href="{{route('adminpanel.orders')}}">Ordrer</a>
         </li>
         <li>
             <a href="{{route('adminpanel.books')}}">Bøger</a>
