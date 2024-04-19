@@ -7,7 +7,7 @@
 
         <section class="books-section">
             <div class="container">
-                <h1 class="section-title">Fremhævede bøger</h1>
+                <h1 class="section-title">Vores nyeste bøger</h1>
                 <div class="books-row">
 
                     @foreach($books as $book)

@@ -3,10 +3,11 @@
         <img src="{{asset('storage/' . $book->image)}}" alt="">
     </div>
 
-    <a href="{{route('book', $book->id)}}">
-        <div class="book-title">{{$book->title}}</div>
-        <!-- TODO: Trim efter 20 tegn og afslut med ".." -->
-        <div class="book-genre">{{$book->summary}}</div>
-        <div class="book-price">{{$book->price}} Dkk,-</div>
-    </a>
+    <div class="book-box-content-container">
+        <a href="{{route('book', $book->id)}}">
+            <div class="book-title">{{$book->title}}</div>
+            <div class="book-summary">{{ mb_substr($book->summary, 0, 85, 'UTF-8') . (strlen($book->summary) > 20 ? '..' : '') }}</div>
+            <div class="book-price">{{$book->price}} Dkk,-</div>
+        </a>
+    </div>
 </section>

@@ -9,7 +9,7 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $books = Book::with('genres', 'condition', 'format', 'language')->orderBy('created_at')->get();
+        $books = Book::with('genres', 'condition', 'format', 'language')->latest()->take(6)->get();
 
         return view('pages.home', [
             'books' => $books

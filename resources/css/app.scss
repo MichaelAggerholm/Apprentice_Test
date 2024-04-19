@@ -169,92 +169,78 @@ body {
     }
 }
 
-.book-box {
-    border-radius: 3px;
-    background: $white;
-    overflow: hidden;
-    box-shadow: 0 8px 40px 0 rgba(49, 32, 137, 5%);
-    text-align: center;
-    max-width: 270px;
-    transition: all 0.4s ease;
+.books-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
-    &:hover {
-        box-shadow: 0 10px 50px 2px rgba(0, 0, 0, 15%);
+    .book-box {
+        border-radius: 3px;
+        background: $white;
+        overflow: hidden;
+        box-shadow: 0 8px 40px 0 rgba(49, 32, 137, 5%);
+        text-align: center;
+        max-width: 270px;
+        transition: all 0.4s ease;
+        margin-bottom: 40px;
 
-        .image {
-            padding: 0;
-            transition: all 0.35s ease-in-out;
+        .book-box-content-container {
+            padding: 0 10px;
+        }
 
-            .add-to-wishlist {
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: $white;
-                border-radius: 200px;
-                padding: 10px 25px;
-                width: 200px;
-                max-width: 90%;
-                font-weight: 400;
-                transition: all 0.3s ease;
-                border: none;
-                cursor: pointer;
+        &:hover {
+            box-shadow: 0 10px 50px 2px rgba(0, 0, 0, 15%);
 
-                &:hover {
-                    background-color: $danger;
-                    color: $white;
-                }
+            .image {
+                padding: 0;
+                transition: all 0.35s ease-in-out;
             }
         }
-    }
 
-    .image {
-        background: #cbcbcb;
-        padding: 15px;
-        height: 230px;
-        width: 270px;
-        max-width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-        transition: all 0.4s ease;
-        position: relative;
-
-        img {
+        .image {
+            background: #cbcbcb;
+            padding: 15px;
+            height: 230px;
+            width: 270px;
             max-width: 100%;
-            max-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            transition: all 0.4s ease;
+            position: relative;
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
         }
 
-        .add-to-wishlist {
-            display: none;
+        a {
+            text-decoration: none;
         }
-    }
 
-    a {
-        text-decoration: none;
-    }
+        .book-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: $black;
+            margin-bottom: 10px;
+        }
 
-    .book-title {
-        font-size: 18px;
-        font-weight: 500;
-        color: $black;
-        margin-bottom: 10px;
-    }
+        .book-summary {
+            color: $grey;
+            font-style: italic;
+            font-weight: 200;
+            margin-bottom: 10px;
+        }
 
-    .book-genre {
-        color: $grey;
-        font-style: italic;
-        font-weight: 200;
-        margin-bottom: 10px;
-    }
-
-    .book-price {
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 20px;
-        color: $black;
+        .book-price {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: $black;
+        }
     }
 }
 
