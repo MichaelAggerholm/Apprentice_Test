@@ -20,11 +20,11 @@
         <div class="container">
             <div class="book-page-row">
                 <section class="book-page-image mt-3">
-                    <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->title . ' image'}}" height="150" width="150">
+                    <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->title . ' image'}}">
                 </section>
                 <section class="book-page-details">
                     <p class="b-title">{{$book->title}}</p>
-                    <p class="b-price">{{$book->price}} Dkk,-</p> {{--TODO: Skal muligvis divideres med 100 pga. betalingsopsætning--}}
+                    <p class="b-price">{{$book->price}} Dkk,-</p>
                     @foreach($book->genres as $genre)
                         <p class="b-genre">{{$genre->name}}</p>
                     @endforeach
