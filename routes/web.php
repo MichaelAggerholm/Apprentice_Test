@@ -100,6 +100,7 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::post('/', [BookController::class, 'store'])->name('adminpanel.book.store');
         Route::delete('/{id}', [BookController::class, 'destroy'])->name('adminpanel.book.destroy');
         Route::patch('/{id}', [BookController::class, 'restore'])->name('adminpanel.book.restore');
+        Route::get('/import', [BookController::class, 'import'])->name('adminpanel.book.import');
     });
 
     // Activity Log

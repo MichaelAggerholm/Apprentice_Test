@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\BookActivity;
+use App\Imports\BooksImport;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Condition;
@@ -11,6 +12,8 @@ use App\Models\Genre;
 use App\Models\Language;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Excel;
 
 class BookController extends Controller
 {
@@ -102,5 +105,18 @@ class BookController extends Controller
         event(new BookActivity(auth()->user(), $book, 'restored'));
 
         return redirect()->back()->with('success', 'Bogen blev gendannet');
+    }
+
+    public function import(Excel $excel)
+    {
+        try {
+            $path = Storage::disk('public')->path('test/import_test.xlsx');
+            $excel->import(new BooksImport, $path);
+
+            return back()->with('success', 'Bøger blev importeret med succes');
+
+        } catch (\Exception $e) {
+            return back()->with('warning', 'Der blev ikke importeret nogen bøger, bedre fejlbesked og logging over hvad der sker under import, bør komme senere, her er nuværende exception: '.$e->getMessage());
+        }
     }
 }

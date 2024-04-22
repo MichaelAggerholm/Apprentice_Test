@@ -34,6 +34,9 @@
             <a href="#">Brugerer</a>
         </li>
         <li>
+            <a href="{{route('adminpanel.book.import')}}">Import bøger</a>
+        </li>
+        <li>
             <a href="{{route('adminpanel.activitylog')}}">Admin aktivitet</a>
         </li>
     </ul>
