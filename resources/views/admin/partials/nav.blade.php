@@ -31,7 +31,7 @@
             <a href="{{route('adminpanel.authors')}}">Forfatterer</a>
         </li>
         <li>
-            <a href="#">Brugerer</a>
+            <a href="{{route('adminpanel.users')}}">Brugerer</a>
         </li>
         <li>
             <a href="{{route('adminpanel.book.import')}}">Import bøger</a>
