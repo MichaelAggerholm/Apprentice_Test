@@ -32,6 +32,8 @@
                         </table>
                     </div>
                 </div>
+                <br>
+                <a href="{{ route('adminpanel.activitylog.export') }}" class="btn btn-primary">Download fuld Log som Excel fil</a>
             </div>
         </div>
     </div>

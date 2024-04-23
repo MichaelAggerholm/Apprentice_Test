@@ -105,9 +105,10 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::get('/import', [BookController::class, 'import'])->name('adminpanel.book.import');
     });
 
-    // Activity Log
+// Activity Log
     Route::group(['prefix' => 'activitylog'], function() {
         Route::get('/', [ActivityLogController::class, 'index'])->name('adminpanel.activitylog');
+        Route::get('/export', [ActivityLogController::class, 'export'])->name('adminpanel.activitylog.export');
     });
 
     // Order routes
