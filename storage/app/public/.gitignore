@@ -1,4 +1,6 @@
 *
 !test/
 !test/*
+!import/
+!import/*
 !.gitignore

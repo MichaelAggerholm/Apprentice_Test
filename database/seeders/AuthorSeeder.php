@@ -24,5 +24,27 @@ class AuthorSeeder extends Seeder
             "biography" => "Joanne Rowling was born on 31st July 1965 at Yate General Hospital near Bristol, and grew up in Gloucestershire in England and in Chepstow, Gwent, in south-east Wales.",
             "website_url" => "https://www.jkrowling.com/",
         ]);
+
+        Author::factory()->create([
+            "first_name" => "Tonny",
+            "middle_name" => "",
+            "last_name" => "Gulløv",
+            "author_name" => "Tonny Gulløv",
+            "language_id" => "1",
+            "birth_date" => "1982-09-11",
+            "biography" => "",
+            "website_url" => "",
+        ]);
+
+        Author::factory()->create([
+            "first_name" => "Josefine",
+            "middle_name" => "",
+            "last_name" => "Ottesen",
+            "author_name" => "Josefine Ottesen",
+            "language_id" => "1",
+            "birth_date" => "1956-02-04",
+            "biography" => "Josefine Ottesen er en dansk børnebogsforfatter, skuespiller, teaterinstruktør mm.",
+            "website_url" => "https://www.josefineottesen.dk/",
+        ]);
     }
 }
