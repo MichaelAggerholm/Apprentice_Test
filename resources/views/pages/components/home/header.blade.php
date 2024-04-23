@@ -5,7 +5,10 @@
     </div>
 
     <div class="home-header-search">
-        <input type="text" name="query" placeholder="Search..." />
+        <form action="/" method="GET">
+            <input type="text" name="query" placeholder="Søg på titler, formater, tilstande eller sprog.." value="{{ request()->get('query') }}" />
+            <input type="submit" style="display: none;" />
+        </form>
     </div>
 
 </header>
