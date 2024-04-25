@@ -103,6 +103,8 @@ class AuthorController extends Controller
 
         $author->save();
 
+        event(new AuthorActivity(auth()->user(), $author, 'updated'));
+
         return redirect()->route('adminpanel.authors')->with('success', 'Forfatteren blev opdateret!');
     }
 
