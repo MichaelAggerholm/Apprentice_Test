@@ -10,9 +10,11 @@
                 <h1 class="section-title">Vores nyeste bøger</h1>
                 <div class="books-row">
 
-                    @foreach($books as $book)
+                    @forelse($books as $book)
                         <x-book-box :book="$book" />
-                    @endforeach
+                    @empty
+                        <p>Ingen resultater fundet.</p>
+                    @endforelse
 
                 </div>
             </div>
