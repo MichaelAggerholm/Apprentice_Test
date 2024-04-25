@@ -102,6 +102,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Book routes
     Route::group(['prefix' => 'books'], function() {
         Route::get('/', [BookController::class, 'index'])->name('adminpanel.books');
+        Route::get('/{id}/edit', [BookController::class, 'edit'])->name('adminpanel.book.edit');
+        Route::put('/{id}', [BookController::class, 'update'])->name('adminpanel.book.update');
         Route::post('/', [BookController::class, 'store'])->name('adminpanel.book.store');
         Route::delete('/{id}', [BookController::class, 'destroy'])->name('adminpanel.book.destroy');
         Route::patch('/{id}', [BookController::class, 'restore'])->name('adminpanel.book.restore');

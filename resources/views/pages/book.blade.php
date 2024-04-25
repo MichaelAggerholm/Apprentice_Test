@@ -20,7 +20,7 @@
         <div class="container">
             <div class="book-page-row">
                 <section class="book-page-image mt-3">
-                    <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->title . ' image'}}">
+                    <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->title . ' image'}}" style="max-width: 400px;">
                 </section>
                 <section class="book-page-details">
                     <p class="b-title">{{$book->title}}</p>

@@ -89,6 +89,75 @@ class BookController extends Controller
         return redirect()->back()->with('success', 'Bogen blev oprettet')->withInput();
     }
 
+    public function edit($id) {
+        $book = Book::findOrFail($id);
+        $conditions = Condition::all();
+        $formats = Format::all();
+        $publishers = Publisher::all();
+        $languages = Language::all();
+        $genres = Genre::all();
+        $authors = Author::all();
+
+        return view('admin.pages.books.edit', [
+            'book' => $book,
+            'conditions' => $conditions,
+            'formats' => $formats,
+            'publishers' => $publishers,
+            'languages' => $languages,
+            'genres' => $genres,
+            'authors' => $authors,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'condition_id' => 'required|integer|exists:conditions,id',
+            'format_id' => 'required|integer|exists:formats,id',
+            'publisher_id' => 'required|integer|exists:publishers,id',
+            'language_id' => 'required|integer|exists:languages,id',
+            'genres' => 'required|array',
+            'authors' => 'required|array',
+            'title' => 'required|string|max:255',
+            'summary' => 'required|string',
+            'isbn' => 'required|string|max:13|unique:books,isbn,'.$id,
+            'publish_date' => 'required|date',
+            'page_count' => 'required|integer|min:1',
+            'stock' => 'integer|nullable',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+        ]);
+
+        $book = Book::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $image_name = 'book_images/' . time() . '-' . rand(0, 9999) . '.' . $request->image->extension();
+            $request->image->storeAs('public', $image_name);
+            $book->image = $image_name;
+        }
+
+        $book->condition_id = $request->condition_id;
+        $book->format_id = $request->format_id;
+        $book->publisher_id = $request->publisher_id;
+        $book->language_id = $request->language_id;
+        $book->title = $request->title;
+        $book->summary = $request->summary;
+        $book->isbn = $request->isbn;
+        $book->publish_date = $request->publish_date;
+        $book->page_count = $request->page_count;
+        $book->stock = $request->stock;
+        $book->price = $request->price;
+
+        $book->save();
+
+        $book->genres()->sync($request->genres);
+        $book->authors()->sync($request->authors);
+
+        event(new BookActivity(auth()->user(), $book, 'updated'));
+
+        return redirect()->route('adminpanel.books')->with('success', 'Bogen blev opdateret');
+    }
+
     public function destroy($id) {
         $book = Book::findOrFail($id);
         $book->delete();
