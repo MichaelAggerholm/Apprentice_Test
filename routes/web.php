@@ -84,6 +84,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Author routes
     Route::group(['prefix' => 'authors'], function() {
         Route::get('/', [AuthorController::class, 'index'])->name('adminpanel.authors');
+        Route::get('/{id}/edit', [AuthorController::class, 'edit'])->name('adminpanel.author.edit');
+        Route::put('/{id}', [AuthorController::class, 'update'])->name('adminpanel.author.update');
         Route::post('/', [AuthorController::class, 'store'])->name('adminpanel.author.store');
         Route::delete('/{id}', [AuthorController::class, 'destroy'])->name('adminpanel.author.destroy');
         Route::patch('/{id}', [AuthorController::class, 'restore'])->name('adminpanel.author.restore');
@@ -106,7 +108,7 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
         Route::get('/import', [BookController::class, 'import'])->name('adminpanel.book.import');
     });
 
-// Activity Log
+    // Activity Log
     Route::group(['prefix' => 'activitylog'], function() {
         Route::get('/', [ActivityLogController::class, 'index'])->name('adminpanel.activitylog');
         Route::get('/export', [ActivityLogController::class, 'export'])->name('adminpanel.activitylog.export');
@@ -123,8 +125,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     Route::group(['prefix' => 'users'], function() {
         Route::get('/', [UserController::class, 'index'])->name('adminpanel.users');
         Route::get('/{id}/edit', [UserController::class, 'edit'])->name('adminpanel.user.edit');
-        Route::post('/', [UserController::class, 'store'])->name('adminpanel.user.store');
         Route::put('/{id}', [UserController::class, 'update'])->name('adminpanel.user.update');
+        Route::post('/', [UserController::class, 'store'])->name('adminpanel.user.store');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('adminpanel.user.destroy');
         Route::patch('/{id}', [UserController::class, 'restore'])->name('adminpanel.user.restore');
     });
