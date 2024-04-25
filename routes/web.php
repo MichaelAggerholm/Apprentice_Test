@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // Pages routes
 Route::get('/', [PagesController::class, 'home'])->name('home');
+Route::get('/all-books', [PagesController::class, 'allBooks'])->name('allBooks');
 Route::get('/cart', [PagesController::class, 'cart'])->name('cart');
 Route::get('/book/{id}', [PagesController::class, 'book'])->name('book');
 Route::get('/account', [PagesController::class, 'account'])->name('account')->middleware('auth');

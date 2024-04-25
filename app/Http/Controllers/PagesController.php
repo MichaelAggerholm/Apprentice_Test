@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Condition;
+use App\Models\Format;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -33,6 +35,42 @@ class PagesController extends Controller
 
         return view('pages.home', [
             'books' => $books
+        ]);
+    }
+
+    public function allBooks(Request $request)
+    {
+        $conditions = $request->get('conditions', []);
+        $formats = $request->get('formats', []);
+        $query = $request->get('query', '');
+
+        $books = Book::with('genres', 'condition', 'format', 'language');
+
+        if(count($conditions) > 0){
+            $books->whereIn('condition_id', $conditions);
+        }
+
+        if(count($formats) > 0){
+            $books->whereIn('format_id', $formats);
+        }
+
+        if($query != ''){
+            $books
+                ->where('books.title', 'LIKE', "%{$query}%")
+                ->orWhere('conditions.name', 'LIKE', "%{$query}%")
+                ->orWhere('formats.name', 'LIKE', "%{$query}%")
+                ->orWhere('languages.name', 'LIKE', "%{$query}%");
+        }
+
+        $books = $books->latest()->get();
+
+        $conditions = Condition::all();
+        $formats = Format::all();
+
+        return view('pages.allBooks', [
+            'books' => $books,
+            'conditions' => $conditions,
+            'formats' => $formats
         ]);
     }
 
