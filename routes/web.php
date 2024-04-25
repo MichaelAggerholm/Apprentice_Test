@@ -94,6 +94,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Publisher routes
     Route::group(['prefix' => 'publishers'], function() {
         Route::get('/', [PublisherController::class, 'index'])->name('adminpanel.publishers');
+        Route::get('/{id}/edit', [PublisherController::class, 'edit'])->name('adminpanel.publisher.edit');
+        Route::put('/{id}', [PublisherController::class, 'update'])->name('adminpanel.publisher.update');
         Route::post('/', [PublisherController::class, 'store'])->name('adminpanel.publisher.store');
         Route::delete('/{id}', [PublisherController::class, 'destroy'])->name('adminpanel.publisher.destroy');
         Route::patch('/{id}', [PublisherController::class, 'restore'])->name('adminpanel.publisher.restore');

@@ -23,7 +23,7 @@ class PublisherController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'city' => 'required|max:255',
-            'zip' => 'required|regex:/\b\d{4}\b/', // Regex matching a 4 digit zipcode
+            'zip' => 'required|regex:/\b\d{4}\b/', // Regex match på postnr med 4 tal.
             'country' => 'required|max:255',
             'contact_name' => 'required|max:255',
             'contact_email' => 'required|email|max:255',
@@ -48,6 +48,46 @@ class PublisherController extends Controller
         event(new PublisherActivity(auth()->user(), $publisher, 'created'));
 
         return redirect()->back()->with('success', 'Udgiveren blev oprettet');
+    }
+
+    public function edit($id)
+    {
+        $publisher = Publisher::find($id);
+
+        return view('admin.pages.publishers.edit', ['publisher' => $publisher]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $publisher = Publisher::find($id);
+
+        $request->validate([
+            'name' => 'required|max:255',
+            'address' => 'required|max:255',
+            'city' => 'required|max:255',
+            'zip' => 'required|regex:/\b\d{4}\b/',
+            'country' => 'required|max:255',
+            'contact_name' => 'required|max:255',
+            'contact_email' => 'required|email|max:255',
+            'contact_phone' => 'required|digits:8',
+            'website_url' => '',
+        ]);
+
+        $publisher->name = $request->name;
+        $publisher->address = $request->address;
+        $publisher->city = $request->city;
+        $publisher->zip = $request->zip;
+        $publisher->country = $request->country;
+        $publisher->contact_name = $request->contact_name;
+        $publisher->contact_email = $request->contact_email;
+        $publisher->contact_phone = $request->contact_phone;
+        $publisher->website_url = $request->website_url ? $request->website_url : NULL;
+
+        $publisher->save();
+
+        event(new PublisherActivity(auth()->user(), $publisher, 'updated'));
+
+        return redirect()->route('adminpanel.publishers')->with('success', 'Udgiveren blev opdateret');
     }
 
     public function destroy($id) {
