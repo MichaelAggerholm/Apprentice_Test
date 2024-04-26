@@ -56,8 +56,7 @@
                                 <tr>
                                     <td>{{$genre->id}}</td>
                                     <td>{{$genre->name}}</td>
-                                    {{-- TODO: Husk at lave "Mængde af bøger med denne genre"--}}
-                                    <td>-</td>
+                                    <td>{{$genre->books_count}}</td>
                                     <td>{{\Carbon\Carbon::parse($genre->created_at)->format('d/m/Y')}}</td>
                                     <td>
                                         <form action="{{route('adminpanel.genre.destroy', $genre->id)}}"

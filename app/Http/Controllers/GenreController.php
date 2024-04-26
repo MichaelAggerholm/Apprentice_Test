@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
     public function index(){
-        $genres = Genre::all();
-        $deleted_genres = Genre::onlyTrashed()->get();
+        $genres = Genre::withCount('books')->get();
+        $deleted_genres = Genre::onlyTrashed()->withCount('books')->get();
         return view('admin.pages.genres.index', ['genres' => $genres, 'deleted_genres' => $deleted_genres]);
     }
 

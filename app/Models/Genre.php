@@ -11,4 +11,9 @@ class Genre extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }
