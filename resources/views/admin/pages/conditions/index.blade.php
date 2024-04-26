@@ -56,8 +56,7 @@
                                 <tr>
                                     <td>{{$condition->id}}</td>
                                     <td>{{$condition->name}}</td>
-{{--                                    TODO: Husk at lave "Mængde af bøger med denne tilstand"--}}
-                                    <td>-</td>
+                                    <td>{{$condition->books_count}}</td>
                                     <td>{{\Carbon\Carbon::parse($condition->created_at)->format('d/m/Y')}}</td>
                                     <td>
                                         <form action="{{route('adminpanel.condition.destroy', $condition->id)}}"

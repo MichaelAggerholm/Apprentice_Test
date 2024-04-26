@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ConditionController extends Controller
 {
-    public function index(){
-        $conditions = Condition::all();
-        $deleted_conditions = Condition::onlyTrashed()->get();
+    public function index() {
+        $conditions = Condition::withCount('books')->get();
+        $deleted_conditions = Condition::onlyTrashed()->withCount('books')->get();
         return view('admin.pages.conditions.index', ['conditions' => $conditions, 'deleted_conditions' => $deleted_conditions]);
     }
 
