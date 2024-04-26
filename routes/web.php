@@ -70,6 +70,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Genre routes
     Route::group(['prefix' => 'genres'], function() {
         Route::get('/', [GenreController::class, 'index'])->name('adminpanel.genres');
+        Route::get('/{id}/edit', [GenreController::class, 'edit'])->name('adminpanel.genre.edit');
+        Route::put('/{id}', [GenreController::class, 'update'])->name('adminpanel.genre.update');
         Route::post('/', [GenreController::class, 'store'])->name('adminpanel.genre.store');
         Route::delete('/{id}', [GenreController::class, 'destroy'])->name('adminpanel.genre.destroy');
         Route::patch('/{id}', [GenreController::class, 'restore'])->name('adminpanel.genre.restore');

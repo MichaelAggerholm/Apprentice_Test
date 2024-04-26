@@ -28,6 +28,26 @@ class GenreController extends Controller
         return redirect()->back()->with('success', 'Genren blev oprettet');
     }
 
+    public function edit($id)
+    {
+        $genre = Genre::findOrFail($id);
+        return view('admin.pages.genres.edit', compact('genre'));
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|unique:genres,name,' . $id . '|max:255'
+        ]);
+
+        $genre = Genre::findOrFail($id);
+        $genre->name = $request->name;
+        $genre->save();
+
+        event(new GenreActivity(auth()->user(), $genre, 'updated'));
+
+        return redirect()->route('adminpanel.genres')->with('success', 'Formatet blev opdateret.');
+    }
+
     public function destroy($id) {
         $genre = Genre::findOrFail($id);
         $genre->delete();
