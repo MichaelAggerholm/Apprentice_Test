@@ -60,6 +60,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Condition routes
     Route::group(['prefix' => 'conditions'], function() {
         Route::get('/', [ConditionController::class, 'index'])->name('adminpanel.conditions');
+        Route::get('/{id}/edit', [ConditionController::class, 'edit'])->name('adminpanel.condition.edit');
+        Route::put('/{id}', [ConditionController::class, 'update'])->name('adminpanel.condition.update');
         Route::post('/', [ConditionController::class, 'store'])->name('adminpanel.condition.store');
         Route::delete('/{id}', [ConditionController::class, 'destroy'])->name('adminpanel.condition.destroy');
         Route::patch('/{id}', [ConditionController::class, 'restore'])->name('adminpanel.condition.restore');

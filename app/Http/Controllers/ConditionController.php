@@ -28,6 +28,26 @@ class ConditionController extends Controller
         return redirect()->back()->with('success', 'Tilstand blev oprettet');
     }
 
+    public function edit($id)
+    {
+        $condition = Condition::findOrFail($id);
+        return view('admin.pages.conditions.edit', compact('condition'));
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|unique:conditions,name,' . $id . '|max:255'
+        ]);
+
+        $condition = Condition::findOrFail($id);
+        $condition->name = $request->name;
+        $condition->save();
+
+        event(new ConditionActivity(auth()->user(), $condition, 'updated'));
+
+        return redirect()->route('adminpanel.conditions')->with('success', 'Tilstand blev opdateret.');
+    }
+
     public function destroy($id) {
         $condition = Condition::findOrFail($id);
         $condition->delete();
