@@ -17,7 +17,7 @@
                             @method('PUT')
 
                             <div class="form-group mb-3">
-                                <label for="name">Sprog</label>
+                                <label for="name">Format</label>
                                 <input type="text" name="name" id="name"
                                        class="form-control @error('name') is-invalid @enderror"
                                        value="{{old('name', $format->name)}}"/>
