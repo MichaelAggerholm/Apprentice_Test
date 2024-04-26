@@ -92,8 +92,8 @@
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
-                                    <td>-</td>
-                                    <td>{{\Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{ $user->is_admin == true ? 'Ja' : 'Nej' }}</td>
                                     <td style="display: flex;">
                                         <a href="{{route('adminpanel.user.edit', $user->id)}}"
                                            class="btn btn-primary"
