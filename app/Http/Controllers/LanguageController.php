@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class LanguageController extends Controller
 {
     public function index(){
-        $languages = Language::all();
-        $deleted_languages = Language::onlyTrashed()->get();
+        $languages = Language::withCount('books')->get();
+        $deleted_languages = Language::onlyTrashed()->withCount('books')->get();
         return view('admin.pages.languages.index', ['languages' => $languages, 'deleted_languages' => $deleted_languages]);
     }
 

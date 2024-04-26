@@ -56,8 +56,7 @@
                                 <tr>
                                     <td>{{$language->id}}</td>
                                     <td>{{$language->name}}</td>
-                                    {{-- TODO: Husk at lave "Mængde af bøger med dette sprog"--}}
-                                    <td>-</td>
+                                    <td>{{$language->books_count}}</td>
                                     <td>{{\Carbon\Carbon::parse($language->created_at)->format('d/m/Y')}}</td>
                                     <td style="display: flex;">
                                         <a href="{{route('adminpanel.language.edit', $language->id)}}"
