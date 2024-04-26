@@ -25,9 +25,44 @@
                 <section class="book-page-details">
                     <p class="b-title">{{$book->title}}</p>
                     <p class="b-price">{{$book->price}} Dkk,-</p>
-                    @foreach($book->genres as $genre)
-                        <p class="b-genre">{{$genre->name}}</p>
-                    @endforeach
+                    <p>Sider:
+                        <span class="b-genre">{{ $book->page_count }}</span>
+                    </p>
+                    <p>Sprog:
+                        <span class="b-genre">{{ $book->language->name }}</span>
+                    </p>
+                    <p>ISBN:
+                        <span class="b-genre">{{ $book->isbn }}</span>
+                    </p>
+                    <p>forfatterer:
+                        @php
+                            $authorNames = [];
+                            foreach($book->authors as $author) {
+                                $authorNames[] = $author->author_name;
+                            }
+                            $authorList = implode(", ", $authorNames);
+                        @endphp
+                        <span class="b-genre">{{ $authorList }}</span>
+                    </p>
+                    <p>Format:
+                        <span class="b-genre">{{ $book->format->name }}</span>
+                    </p>
+                    <p>Udgiver:
+                        <span class="b-genre">{{ $book->publisher->name }}</span>
+                    </p>
+                    <p>Udgivet:
+                        <span class="b-genre">{{ $book->publish_date }}</span>
+                    </p>
+                    <p>Genrer:
+                        @php
+                            $genreNames = [];
+                            foreach($book->genres as $genre) {
+                                $genreNames[] = $genre->name;
+                            }
+                            $genresList = implode(", ", $genreNames);
+                        @endphp
+                        <span class="b-genre">{{ $genresList }}</span>
+                    </p>
                     <p class="b-description">{{$book->summary}}</p>
                     <form action="{{Route('addToCart', $book->id)}}" method="post">
                         @csrf
