@@ -47,6 +47,9 @@
                     <p>Format:
                         <span class="b-genre">{{ $book->format->name }}</span>
                     </p>
+                    <p>Tilstand:
+                        <span class="b-genre">{{ $book->condition->name }}</span>
+                    </p>
                     <p>Udgiver:
                         <span class="b-genre">{{ $book->publisher->name }}</span>
                     </p>
