@@ -173,6 +173,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 
     .book-box {
         border-radius: 3px;
@@ -182,7 +183,7 @@ body {
         text-align: center;
         max-width: 270px;
         transition: all 0.4s ease;
-        margin: 20px;
+        margin: 10px;
 
         .book-box-content-container {
             padding: 0 10px;
@@ -195,6 +196,20 @@ body {
                 padding: 0;
                 transition: all 0.35s ease-in-out;
             }
+        }
+
+        .book-banner {
+            position: absolute;
+            right: -25px;
+            top: 95px;
+            padding: 0px 40px;
+            background: #ff6138;
+            color: #ffffff;
+            font-size: 1em;
+            text-transform: uppercase;
+            transform: rotate(45deg);
+            transform-origin: 100% 0;
+            z-index: 1;
         }
 
         .image {
@@ -369,7 +384,7 @@ body {
             .b-genre {
                 font-weight: 200;
                 font-size: 16px;
-                color: $grey;
+                color: #606060;
                 font-style: italic;
                 margin-bottom: 10px;
             }
