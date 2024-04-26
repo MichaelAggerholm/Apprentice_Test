@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             if (Auth::user()->is_admin) {
-                return view('admin.pages.dashboard')->with('success', 'Du er nu logget ind!');
+                return redirect()->route('adminpanel')->with('success', 'Du er nu logget ind!');
             }
             return redirect('/')->with('success', 'Du er nu logget ind!');
         }
