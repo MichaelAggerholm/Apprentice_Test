@@ -56,8 +56,7 @@
                                 <tr>
                                     <td>{{$format->id}}</td>
                                     <td>{{$format->name}}</td>
-                                    {{-- TODO: Husk at lave "Mængde af bøger med dette format"--}}
-                                    <td>-</td>
+                                    <td>{{$format->books_count}}</td>
                                     <td>{{\Carbon\Carbon::parse($format->created_at)->format('d/m/Y')}}</td>
                                     <td style="display: flex;">
                                         <a href="{{route('adminpanel.format.edit', $format->id)}}"

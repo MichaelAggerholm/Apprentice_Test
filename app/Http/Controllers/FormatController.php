@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class FormatController extends Controller
 {
     public function index(){
-        $formats = Format::all();
-        $deleted_formats = Format::onlyTrashed()->get();
+        $formats = Format::withCount('books')->get();
+        $deleted_formats = Format::onlyTrashed()->withCount('books')->get();
         return view('admin.pages.formats.index', ['formats' => $formats, 'deleted_formats' => $deleted_formats]);
     }
 
