@@ -1,6 +1,9 @@
 <section class="book-box">
     <div class="image">
         <img src="{{asset('storage/' . $book->image)}}" alt="">
+        @if($book->condition->name == "Brugt")
+            <div class="book-banner">Brugt bog</div>
+        @endif
     </div>
 
     <div class="book-box-content-container">
