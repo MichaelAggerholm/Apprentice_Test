@@ -28,6 +28,26 @@ class FormatController extends Controller
         return redirect()->back()->with('success', 'Format blev oprettet');
     }
 
+    public function edit($id)
+    {
+        $format = Format::findOrFail($id);
+        return view('admin.pages.formats.edit', compact('format'));
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|unique:formats,name,' . $id . '|max:255'
+        ]);
+
+        $format = Format::findOrFail($id);
+        $format->name = $request->name;
+        $format->save();
+
+        event(new FormatActivity(auth()->user(), $format, 'updated'));
+
+        return redirect()->route('adminpanel.formats')->with('success', 'Formatet blev opdateret.');
+    }
+
     public function destroy($id) {
         $format = Format::findOrFail($id);
         $format->delete();

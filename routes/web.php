@@ -50,6 +50,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     // Format routes
     Route::group(['prefix' => 'formats'], function() {
         Route::get('/', [FormatController::class, 'index'])->name('adminpanel.formats');
+        Route::get('/{id}/edit', [FormatController::class, 'edit'])->name('adminpanel.format.edit');
+        Route::put('/{id}', [FormatController::class, 'update'])->name('adminpanel.format.update');
         Route::post('/', [FormatController::class, 'store'])->name('adminpanel.format.store');
         Route::delete('/{id}', [FormatController::class, 'destroy'])->name('adminpanel.format.destroy');
         Route::patch('/{id}', [FormatController::class, 'restore'])->name('adminpanel.format.restore');
@@ -75,8 +77,8 @@ Route::group(['prefix' => '/adminpanel', 'middleware' => 'admin'], function () {
     Route::group(['prefix' => 'languages'], function() {
         Route::get('/', [LanguageController::class, 'index'])->name('adminpanel.languages');
         Route::get('/{id}/edit', [LanguageController::class, 'edit'])->name('adminpanel.language.edit');
-        Route::post('/', [LanguageController::class, 'store'])->name('adminpanel.language.store');
         Route::put('/{id}', [LanguageController::class, 'update'])->name('adminpanel.language.update');
+        Route::post('/', [LanguageController::class, 'store'])->name('adminpanel.language.store');
         Route::delete('/{id}', [LanguageController::class, 'destroy'])->name('adminpanel.language.destroy');
         Route::patch('/{id}', [LanguageController::class, 'restore'])->name('adminpanel.language.restore');
     });
