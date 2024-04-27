@@ -48,6 +48,8 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <hr>
+                        <p><a href="https://dashboard.stripe.com/test/developers" target="_blank">Stripe hurtig adgang</a></p>
                     </div>
                 </div>
             </div>
