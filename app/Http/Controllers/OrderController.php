@@ -25,6 +25,6 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->save();
 
-        return redirect()->back()->with('success', 'Ordre status opdateret!');
+        return redirect()->route('adminpanel.orders')->with('success', 'Ordre status opdateret!');
     }
 }
