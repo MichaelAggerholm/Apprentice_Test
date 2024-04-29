@@ -38,6 +38,10 @@ class CheckoutController extends Controller
                     'confirmation_method' => 'manual',
                     'confirm' => true,
                     'return_url' => route('success'),
+                    'metadata' => [
+                        'customer_name' => $request->name,
+                        'product_name' => $request->session()->get('cart')[0]['book']['name'],
+                    ],
                 ]);
             }
         } catch (ApiErrorException $e) {
