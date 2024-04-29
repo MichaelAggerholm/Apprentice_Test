@@ -43,9 +43,24 @@ class BooksImport implements ToModel, WithHeadingRow
     protected function getBookDetails(array $row)
     {
         $condition = Condition::where('name', $row['condition'])->first();
+        if (!$condition) {
+            throw new \Exception("Unable to find Condition: ".$row['condition']);
+        }
+
         $format = Format::where('name', $row['format'])->first();
+        if (!$format) {
+            throw new \Exception("Unable to find Format: ".$row['format']);
+        }
+
         $publisher = Publisher::where('name', $row['publisher'])->first();
+        if (!$publisher) {
+            throw new \Exception("Unable to find Publisher: ".$row['publisher']);
+        }
+
         $language = Language::where('name', $row['language'])->first();
+        if (!$language) {
+            throw new \Exception("Unable to find Language: ".$row['language']);
+        }
 
         return [
             'condition_id'  => $condition->id,
@@ -66,16 +81,20 @@ class BooksImport implements ToModel, WithHeadingRow
     protected function attachGenresToBook(Book $book, array $row)
     {
         $genre = Genre::where('name', $row['genre'])->first();
-        if ($genre) {
-            $book->genres()->attach($genre->id);
+        if (!$genre) {
+            throw new \Exception("Unable to find Genre: ".$row['genre']);
         }
+
+        $book->genres()->attach($genre->id);
     }
 
     protected function attachAuthorsToBook(Book $book, array $row)
     {
         $author = Author::where('author_name', $row['author'])->first();
-        if ($author) {
-            $book->authors()->attach($author->id);
+        if (!$author) {
+            throw new \Exception("Unable to find Author: ".$row['author']);
         }
+
+        $book->authors()->attach($author->id);
     }
 }
