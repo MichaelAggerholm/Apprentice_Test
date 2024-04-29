@@ -23,12 +23,12 @@ class PagesController extends Controller
                 ->orWhere('formats.name', 'LIKE', "%{$query}%")
                 ->orWhere('languages.name', 'LIKE', "%{$query}%")
                 ->latest()
-                ->take(6)
+                ->take(8)
                 ->get();
         } else {
             $books = Book::with('genres', 'condition', 'format', 'language')
                 ->latest()
-                ->take(6)
+                ->take(8)
                 ->get();
         }
 
