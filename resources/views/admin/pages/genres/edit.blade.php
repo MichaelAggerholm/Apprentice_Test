@@ -12,7 +12,7 @@
                         <h5>Rediger genre</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('adminpanel.genre.update', $format->id)}}" method="post">
+                        <form action="{{route('adminpanel.genre.update', $genre->id)}}" method="post">
                             @csrf
                             @method('PUT')
 
