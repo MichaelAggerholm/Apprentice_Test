@@ -14,8 +14,8 @@
                             <thead>
                             <tr>
                                 <th>Ordre id</th>
-                                <th>bruger</th>
-                                <th>bøger</th>
+                                <th>Navn</th>
+                                <th>Bøger</th>
                                 <th>Total</th>
                                 <th>Dato</th>
                                 <th>Status</th>
@@ -26,7 +26,7 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>{{$order->id}}</td>
-                                    <td>{{$order->user->name}}</td>
+                                    <td>{{$order->name}}</td>
                                     <td>{{$order->items->count()}}</td>
                                     <td>{{$order->total / 100}} Kr,-</td>
                                     <td>{{\Carbon\Carbon::parse($order->created_at)->format('d/m - Y')}}</td>

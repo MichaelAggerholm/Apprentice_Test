@@ -35,8 +35,8 @@
                                 <td>{{$order->total / 100}}</td>
                             </tr>
                             <tr>
-                                <td>Bruger</td>
-                                <td>{{$order->user->name}}</td>
+                                <td>Navn</td>
+                                <td>{{$order->name}}</td>
                             </tr>
                             <tr>
                                 <td>Email</td>
