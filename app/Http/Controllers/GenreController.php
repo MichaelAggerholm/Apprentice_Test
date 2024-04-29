@@ -45,7 +45,7 @@ class GenreController extends Controller
 
         event(new GenreActivity(auth()->user(), $genre, 'updated'));
 
-        return redirect()->route('adminpanel.genres')->with('success', 'Formatet blev opdateret.');
+        return redirect()->route('adminpanel.genres')->with('success', 'Genren blev opdateret.');
     }
 
     public function destroy($id) {
