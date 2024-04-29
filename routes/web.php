@@ -148,10 +148,17 @@ Route::get('/clear-caches', function () {
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
-    return 'clear';
+    return 'Alle caches cleared';
 });
 
 // Route for linking storage
 Route::get('/link-storage', function () {
     Artisan::call('storage:link');
+    return 'Storage linked';
+});
+
+Route::get('/migrate-refresh-seed', function () {
+    Artisan::call('migrate:fresh');
+    Artisan::call('db:seed');
+    return 'Databasen er blevet genopbygget';
 });
