@@ -15,7 +15,7 @@ class ActivityLogController extends Controller
     public function index()
     {
         $activityLogs = Activity::orderBy('created_at', 'desc')->take(20)->get();
-        return view('admin.pages.activitylog.index', ['activityLogs' => $activityLogs]);
+        return view('admin.pages.activityLog.index', ['activityLogs' => $activityLogs]);
     }
 
     public function export()
